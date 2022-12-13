@@ -13,10 +13,12 @@
 
 ### 📋 GitHub Status 📋:
 
-<p align="left"> 
-  <img alt="Top Langs" height="150px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ageha734&layout=compact&count_private=true&show_icons=true&theme=onedark" />
-  <img alt="github stats" height="150px" src="https://github-readme-stats.vercel.app/api?username=ageha734&count_private=true&show_icons=true&show_icons=true&theme=onedark" />
-</p>
+<div style="text-align: center;">
+  <p align="left"> 
+    <img alt="Top Langs" height="150px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ageha734&layout=compact&count_private=true&show_icons=true&theme=onedark" />
+    <img alt="github stats" height="150px" src="https://github-readme-stats.vercel.app/api?username=ageha734&count_private=true&show_icons=true&show_icons=true&theme=onedark" />
+  </p>
+</div>
 
 ### 🏆 Trophy 🏆 :
 
