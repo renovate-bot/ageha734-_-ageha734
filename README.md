@@ -3,21 +3,21 @@
   <img alt="github stats" height="150px" src="https://github-readme-stats.vercel.app/api?username=ageha734&count_private=true&show_icons=true&show_icons=true&theme=onedark" />
 </p>
 
-[![github-chart](https://github-chart.vercel.app/api?user=ageha734)](https://github.com/rokumura7/github-chart)
 
-### 近況
+### Current Status
 
-- 💬 メインスキル: Node.js+(Angular+Svelte,TypeScript)+(AWS, GCP, Azure)+Flutterでフロントからインフラまで
-- ✅ もちろんOK: Java,C#,RDB
-- 🥰 Loves: Rpi4+K8s→エッジ+CloudNative、秘密計算とかRaftとか分散合意アルゴリズム(BFT)とか。
+- 💬 MainSkill: Node.js+(Next.js,TypeScript)+Adobe XD+(AWS, GCP, Azure)+Flutter+(Go, Django)+Dart+Unity+Arduino
+- ✅ Easy: C#,RDB
+- 🥰 Loves: Proxmox+k8s+Ansible+AegoCD R(Machine-Learning) VR,AR
 - 👍 Other: Traefik, Jeager, Hyperledger(Fabric&Indy), Terraform, Vault, GraphQL, Grafana
-- 🤔 CloudNativeでCI/CDしたい。Tekton触ってみたい。CloudNativeでML/AIしたい。Kubeflow触ってみたい。とりあえずクバネェ。。。
-- ⚡ SvelteKit+Electron、にWebAssembly載せてみたい、かも。
 
 🙇 よろしくお願いします。🙇
 
+### 📊 GitHub Chart  📊
 
-### 📊 GitHub Status 📋:
+[![github-chart](https://github-chart.vercel.app/api?user=ageha734)](https://github.com/rokumura7/github-chart)
+
+### 📋 GitHub Status 📋:
 
 ![Yoshinori's GitHub stats](https://github-readme-stats.vercel.app/api?custom_title=Yoshinori's%20GitHub%20Status&username=yoshinori-koide&count_private=true&show_icons=true&theme=radical)
 
