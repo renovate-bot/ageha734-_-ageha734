@@ -11,8 +11,8 @@
   <a href="https://qiita.com/ageha734">
     <img height="20" src="https://qiita-badge.apiapi.app/s/ageha734/posts.svg" />
   </a>
-  <//qiita.com/yutkat">
-    <img height="20" src="https://qiita-badge.apiapi.app/s/yutkat/contributions.svg" />
+  <//qiita.com/ageha734">
+    <img height="20" src="https://qiita-badge.apiapi.app/s/ageha734/contributions.svg" />
   </a>
 </p>
 
