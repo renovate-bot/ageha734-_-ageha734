@@ -1,3 +1,5 @@
+[![My Qiita followers](https://qiita-badge.apiapi.app/s/ageha7940/followers.svg)](http://qiita.com/ageha7940)
+
 ### Current Status
 
 - 💬 MainSkill: Node.js+(Next.js,TypeScript)+Adobe XD+(AWS, GCP, Azure)+Flutter+(Go, Django)+Dart+Unity+Arduino
