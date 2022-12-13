@@ -5,22 +5,20 @@
 - 🥰 Loves: Proxmox+k8s+Ansible+AegoCD R(Machine-Learning) VR,AR
 - 👍 Other: Traefik, Jeager, Hyperledger(Fabric&Indy), Terraform, Vault, GraphQL, Grafana
 
-### 📊 GitHub Chart  📊
-
+### 📋 GitHub Status && Chart  📊
 <div style="text-align: center;">
-  [![github-chart](https://github-chart.vercel.app/api?user=ageha734)](https://github.com/rokumura7/github-chart)
- </div>
-
-### 📋 GitHub Status 📋:
-
-<div style="text-align: center;">
-  <p align="left"> 
-    <img alt="Top Langs" height="150px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ageha734&layout=compact&count_private=true&show_icons=true&theme=onedark" />
-    <img alt="github stats" height="150px" src="https://github-readme-stats.vercel.app/api?username=ageha734&count_private=true&show_icons=true&show_icons=true&theme=onedark" />
-  </p>
+    <table border="0"> 
+        <tr>
+            <td><img alt="Top Langs" height="150px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ageha734&layout=compact&count_private=true&show_icons=true&theme=onedark" /></td>
+            <td rowspan="2"><img alt="Top Langs" height="330px" src="https://github-chart.vercel.app/api?user=ageha734" /></td>
+        </tr>
+        <tr>
+            <td><img alt="github stats" height="150px" src="https://github-readme-stats.vercel.app/api?username=ageha734&count_private=true&show_icons=true&show_icons=true&theme=onedark" /></td>
+        </tr>
+    </table>
 </div>
 
-### 🏆 Trophy 🏆 :
+### 🏆 Trophy 🏆
 
 [![trophy](https://github-profile-trophy.vercel.app/?username=ageha734&no-frame=true&theme=onedark&row=2&column=4)](https://github.com/ryo-ma/github-profile-trophy)
 
