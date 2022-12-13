@@ -5,11 +5,11 @@
 - 🥰 Loves: Proxmox+k8s+Ansible+AegoCD R(Machine-Learning) VR,AR
 - 👍 Other: Traefik, Jeager, Hyperledger(Fabric&Indy), Terraform, Vault, GraphQL, Grafana
 
-🙇 よろしくお願いします。🙇
-
 ### 📊 GitHub Chart  📊
 
-[![github-chart](https://github-chart.vercel.app/api?user=ageha734)](https://github.com/rokumura7/github-chart)
+<div style="text-align: center;">
+  [![github-chart](https://github-chart.vercel.app/api?user=ageha734)](https://github.com/rokumura7/github-chart)
+ </div>
 
 ### 📋 GitHub Status 📋:
 
