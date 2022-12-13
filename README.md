@@ -1,9 +1,3 @@
-<p align="left"> 
-  <img alt="Top Langs" height="150px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ageha734&layout=compact&count_private=true&show_icons=true&theme=onedark" />
-  <img alt="github stats" height="150px" src="https://github-readme-stats.vercel.app/api?username=ageha734&count_private=true&show_icons=true&show_icons=true&theme=onedark" />
-</p>
-
-
 ### Current Status
 
 - 💬 MainSkill: Node.js+(Next.js,TypeScript)+Adobe XD+(AWS, GCP, Azure)+Flutter+(Go, Django)+Dart+Unity+Arduino
@@ -19,7 +13,10 @@
 
 ### 📋 GitHub Status 📋:
 
-![Yoshinori's GitHub stats](https://github-readme-stats.vercel.app/api?custom_title=Yoshinori's%20GitHub%20Status&username=yoshinori-koide&count_private=true&show_icons=true&theme=radical)
+<p align="left"> 
+  <img alt="Top Langs" height="150px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ageha734&layout=compact&count_private=true&show_icons=true&theme=onedark" />
+  <img alt="github stats" height="150px" src="https://github-readme-stats.vercel.app/api?username=ageha734&count_private=true&show_icons=true&show_icons=true&theme=onedark" />
+</p>
 
 ### 🏆 Trophy 🏆 :
 
