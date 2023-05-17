@@ -1,0 +1,266 @@
+add_newline = true
+scan_timeout = 10
+
+format = '''
+[┌───────────────────](bold green)$character
+[│](bold green)$aws$gcloud$azure
+[│](bold green)$terraform$docker_context$kubernetes
+[│](bold green)$c$dotnet$golang$dart$java$kotlin$swift$julia$nodejs$perl$php$python$conda$ruby$rlang$rust$scala$zig
+[│](bold green)$time$custom
+[│](bold green)$shell$localip$username$directory$git_branch$git_status
+[└─](bold green)$character
+'''
+
+[character]
+success_symbol = "[▶](bold green)"
+error_symbol = "[▶](bold red)"
+vimcmd_symbol = "[◀](bold green)"
+vimcmd_replace_one_symbol = "[◀](bold purple)"
+vimcmd_replace_symbol = "[◀](bold purple)"
+vimcmd_visual_symbol = "[◀](bold yellow)"
+disabled = false
+
+[time]
+disabled = false
+format = '[\[ $time \]]($style) '
+time_format = '%T'
+utc_time_offset = '-5'
+time_range = '10:00:00-14:00:00'
+
+[custom.todo]
+command = "source ~/.config/nushell/chktodo.nu"
+detect_files = ["TODO.item"]
+
+[custom.md]
+command = "source ~/.config/nushell/chkbox.nu"
+detect_extensions = ["md"]
+
+[localip]
+ssh_only = false
+format = '[->$localipv4](bold red)'
+disabled = false
+
+[shell]
+format = '[$indicator]($style)'
+fish_indicator = ''
+powershell_indicator = '_'
+unknown_indicator = 'mysh'
+style = 'cyan bold'
+disabled = false
+
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = "[->$user]($style)"
+show_always = true
+disabled = false
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style)'
+home_symbol = "->🏡"
+use_os_path_sep = true
+disabled = false
+truncation_length = 5
+truncation_symbol = '->'
+truncate_to_repo = true
+read_only = '->🔒'
+read_only_style = 'red'
+style = 'bold purple'
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style)'
+symbol = '->'
+style = 'dimmed green'
+disabled = false
+truncation_length = 4
+truncation_symbol = ''
+ignore_branches = ['master', 'main']
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+ahead = '[⇡\($count\)](white)'
+diverged = '[⇕\(⇡${ahead_count}⇣${behind_count}\)](gray)'
+behind = '[⇣\($count\)](black)'
+conflicted = '[=\($count\)](blue)'
+up_to_date = '✓'
+untracked = '[?\($count\)](brown)'
+stashed = '[$\($count\)](purple)'
+modified = '[!\($count\)](yellow)'
+staged = '[+\($count\)](green)'
+renamed = '[»\($count\)](orange)'
+deleted = '[✘\($count\)](red)'
+
+[aws]
+format = '[$symbol($region)]($style) '
+symbol = '🅰 '
+style = 'bold yellow'
+disabled = false
+
+[aws.region_aliases]
+us-east-1 = 'va'
+ap-southeast-2 = 'au'
+
+[gcloud]
+format = '[$symbol($region)]($style) '
+symbol = '️🇬️'
+style = 'blue bold'
+disabled = false
+
+[gcloud.region_aliases]
+us-central1 = 'uc1'
+asia-northeast1 = 'an1'
+
+[azure]
+format = '[$symbol($subscription)]($style) '
+symbol = '󰠅'
+style = 'blue bold'
+disabled = false
+
+[terraform]
+format = '[$symbol($workspace)]($style) '
+symbol = '🏎💨'
+style = 'bold 105'
+disabled = false
+
+[docker_context]
+format = '[$symbol($context)]($style) '
+symbol = '🐋💦'
+style = 'bold 105'
+disabled = false
+
+[kubernetes]
+format = '[$symbol($cluster)]($style) '
+symbol = '❄️🫧'
+style = 'dimmed green'
+disabled = false
+
+[c]
+format = '[$symbol($name $version )(🎯 $tfm )]($style) '
+version_format = 'v${raw}'
+symbol = '🥅 '
+style = '149'
+disabled = false
+
+[dotnet]
+format = '[$symbol($version )(🎯 $tfm )]($style) '
+version_format = 'v${raw}'
+symbol = '🥅 '
+style = 'green'
+disabled = false
+
+[golang]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🏎 '
+style = 'bold cyan'
+disabled = false
+
+[dart]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🎯 '
+style = 'bold blue'
+disabled = false
+
+[java]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '☕ '
+style = 'red dimmed'
+disabled = false
+
+[kotlin]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🅺 '
+style = 'bold blue'
+disabled = false
+
+[swift]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🐦 '
+style = 'bold 202'
+disabled = false
+
+[julia]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '∴ '
+style = 'bold purple'
+disabled = false
+
+[nodejs]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = ' '
+style = 'bold green'
+not_capable_style = 'bold red'
+disabled = false
+
+[perl]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🐫 '
+style = 'bold 149'
+disabled = false
+
+[php]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🐘 '
+style = '147 bold'
+disabled = false
+
+[python]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+pyenv_version_name = true
+python_binary = 'python3'
+symbol = '👾 '
+style = 'yellow bold'
+disabled = false
+
+[conda]
+format = '[$symbol($environment )]($style) '
+version_format = 'v${raw}'
+symbol = '🏎 '
+style = 'dimmed green'
+truncation_length = 2
+ignore_base = false
+disabled = false
+
+[ruby]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🔺 '
+style = 'bold red'
+disabled = false
+
+[rlang]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '📐 '
+style = 'blue bold'
+disabled = false
+
+[rust]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '⚙️ '
+style = 'red bold'
+disabled = false
+
+[scala]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '🌟 '
+style = 'red dimmed'
+disabled = false
+
+[zig]
+format = '[$symbol($version )]($style) '
+version_format = 'v${raw}'
+symbol = '⚡️ '
+style = 'bold yellow'
+disabled = false

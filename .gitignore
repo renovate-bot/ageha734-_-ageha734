@@ -21,7 +21,7 @@
 .colima
 .conda
 .condarc
-.config
+.config/*
 !.config/alacritty
 !.config/fish
 !.config/helix
@@ -54,7 +54,7 @@
 .kube
 .kuberlr
 .lesshst
-.lima
+.lima/*
 !.lima/_config
 !.lima/colima/colima.yaml
 !.lima/colima/lima.yaml
