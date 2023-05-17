@@ -1,0 +1,489 @@
+#----------------------------------------------------------
+# setting
+#----------------------------------------------------------
+ # 履歴ファイルを指定
+HISTFILE=~/.zsh_history
+# 履歴に保存するコマンド数
+HISTSIZE=10000
+# 履歴ファイルに保存するコマンド数
+#SAVEHIST=10000
+# 候補が大量時にもメニュー表示の確認せず表示させる
+#LISTMAX=0
+# cd記録数の設定
+#DIRSTACKSIZE=50
+# cd検索パスの設定
+cdpath=~/proj
+# 環境変数を補完
+setopt AUTO_PARAM_KEYS 
+# ビープ音ならなさない
+setopt nobeep 
+# 履歴に時間も記録
+setopt extended_history
+# 履歴の同じ古いコマンドは削除
+setopt hist_ignore_all_dups
+# 直前と同じコマンドラインはヒストリに追加しない
+setopt hist_ignore_dups 
+# history (fc -l)コマンドを履歴に保存しない
+setopt hist_no_store
+# 履歴に余計な空白を記録しない
+setopt hist_reduce_blanks
+# 他ウィンドウと履歴を共有する
+setopt share_history
+# 履歴を追加 (毎回 .zsh_history を作るのではなく)
+setopt append_history
+# 履歴をインクリメンタルに追加
+setopt inc_append_history
+# ディレクトリ名のみでもcd
+setopt auto_cd
+# cd時にpushをする
+setopt auto_pushd
+# pushに同じものを登録しない
+setopt pushd_ignore_dups
+# カーソル位置での単語補完を有効
+setopt complete_in_word
+# リスト表示をコンパクトにする
+setopt list_packed
+# リスト選択を縦でなく横移動
+setopt list_rows_first
+# 補完候補一覧でファイルの種別を識別マーク表示(ls -F の記号)
+setopt list_types
+# 自動でのmenu表示をしない
+setopt no_auto_menu
+# 自動でのmenu補完をしない
+setopt no_menu_complete
+# ディレクトリ選択時、最後の/を残す。好み。
+setopt noautoremoveslash
+
+export LANG=ja_JP.UTF-8 # 文字コード
+export BAT_THEME=zenburn # BATシンタックスハイライトでチートシート表示するため、#のコメント行を見やすくする
+
+if [[ $(command -v kak) ]]; then
+  export EDITOR=kak # viの代わりにKakouneを使う
+  export VISUAL=kak
+  alias vi='kak'
+fi
+
+if [ -e "$HOME/.anyenv" ]
+then
+    export ANYENV_ROOT="$HOME/.anyenv"
+    export PATH="$ANYENV_ROOT/bin:$PATH"
+    if command -v anyenv 1>/dev/null 2>&1
+    then
+        eval "$(anyenv init -)"
+    fi
+fi
+
+if [ -e "$HOME/Library/Android/sdk" ]
+then
+    export ANDROID_HOME=$HOME/Library/Android/sdk
+    export PATH=$PATH:$ANDROID_HOME:$ANDROID_HOME/emulator:$ANDROID_HOME/tools/:$ANDROID_HOME/platform-tools
+fi
+
+if [ -e "$HOME/flutter/bin" ]
+then
+    export PATH="$PATH:$HOME/flutter/bin"
+fi
+
+autoload -U compinit && compinit # 補間
+autoload -Uz smart-insert-last-word
+zle -N insert-last-word smart-insert-last-word
+
+function cd(){
+    builtin cd $@ && ls;
+}
+
+mkcd() {
+    if [[ -d "$1" ]]; then
+        cd "$1"
+    else
+        mkdir -p "$1" && cd "$1"
+    fi
+}
+
+# 履歴のあいまい検索
+select-history() {
+    LBUFFER=$(history -Dinr 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > " | choose 3:)
+}
+zle -N select-history
+
+# 履歴をあいまい検索から実行
+accept-history() {
+    zle select-history
+    zle accept-line
+}
+zle -N accept-history
+
+# 補完メニューの明示的表示
+menu-complete-and-select() {
+    zle menu-complete
+    zle menu-select
+}
+zle -N menu-complete-and-select
+
+# menuselectキーマップ
+zmodload -i zsh/complist
+accept-line-anywhere() {
+    zle accept-line
+}
+zle -N accept-line-anywhere
+
+zle-line-init() {
+  if [[ $(command -v lsd) ]]; then
+    # TODO 色をつけたい（やり方不明）
+    # TODO いい感じにwrapさせたい（ただの手抜き）
+    local maxlen=$(echo $(( $COLUMNS * 2 )))
+    local all=$(lsd -1FL --icon never --group-dirs first)
+    local dirs=""
+    for d (${(f)all}) {
+        if [[ "$d" =~ "[ ]" ]]; then
+            dirs="$dirs '$d'"
+        else
+            dirs="$dirs $d"
+        fi
+        if [ ${#dirs} -gt $maxlen ]; then
+            dirs="${dirs:0:$maxlen-3}..."
+            break
+        fi
+    }
+    zle -M "$dirs"
+  fi
+}
+zle -N zle-line-init
+
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+
+#----------------------------------------------------------
+# p10k
+#----------------------------------------------------------
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#----------------------------------------------------------
+# Added by Zinit's installer
+#----------------------------------------------------------
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+       print -P "%F{33} %F{34}Installation successful.%f%b" || \
+       print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+#----------------------------------------------------------
+# Zinit plugins
+#----------------------------------------------------------
+# Load the pure theme, with zsh-async library that's bundled with it.
+# シンタックスハイライト
+zinit light zsh-users/zsh-syntax-highlighting
+# 入力補完
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+# コマンド履歴を検索
+zinit light zdharma/history-search-multi-word
+
+#----------------------------------------------------------
+# alias
+#----------------------------------------------------------
+# exa(ls)
+if [[ $(command -v exa) ]]; then
+  alias e='exa --icons --git'
+  alias l=e
+  alias ls=e
+  alias ea='exa -a --icons --git'
+  alias la=ea
+  alias ee='exa -aahl --icons --git'
+  alias ll=ee
+  alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
+  alias lt=et
+  alias eta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
+  alias lta=eta
+  alias l='clear && ls'
+fi
+
+# lsd(ls)
+if [[ $(command -v lsd) ]]; then
+    alias ts='lsd -A --group-dirs=last'
+    alias tt='lsd -Ahl --total-size --group-dirs=last'
+    alias tree='lsd -A --tree --group-dirs=last'
+    alias tr='lsd -Ahl --total-size --tree --group-dirs=last'
+    alias tl='lsd -1FL --icon never --group-dirs first'
+fi
+
+# bat(cat)
+if [[ $(command -v bat) ]]; then
+    alias cat='bat --paging=never'
+    alias less='bat'
+    alias -g L='|bat --style=plain'
+    ch() { cheat $* | bat --style=plain -l zsh }
+    pop() { cd $(dirs -lp | bat -r 2: | fzf --no-sort --prompt='cd >') }
+fi
+
+# choose(cut)
+if [[ $(command -v choose) ]]; then
+    alias cut='choose'
+fi
+
+# duf(v)
+if [[ $(command -v duf) ]]; then
+    alias df='duf'
+fi
+
+# delta(diff)
+if [[ $(command -v delta) ]]; then
+    alias diff='delta'
+fi
+
+# procs(ps)
+if [[ $(command -v procs) ]]; then
+    alias ps='procs --tree'
+fi
+
+# zoxide（cd）
+if [[ $(command -v zoxide) ]]; then
+    eval "$(zoxide init --cmd j zsh)"
+fi
+
+# dust（du）
+if [[ $(command -v dust) ]]; then
+    alias du='dust'
+fi
+
+# fd(find)
+if [[ $(command -v fd) ]]; then
+    alias find='fd'
+fi
+
+# ripgrep(grep)
+if [[ $(command -v rg) ]]; then
+    alias grep='rg -S'
+    alias -g G='|rg -S'
+    jgrep() { gron | grep $* | gron -u }
+fi
+
+# bottom（top）
+if [[ $(command -v btm) ]]; then
+    alias top='btm'
+fi
+
+# gtime（time）
+if [[ $(command -v gtime) ]]; then
+    alias time='gtime'
+fi
+
+# trash（rm）
+if [[ $(command -v trash) ]]; then
+    alias rm='trash -F'
+fi
+
+if [[ $(command -v git) ]]; then
+    alias g='git'
+    alias ga='git add'
+    alias gd='git diff'
+    alias gs='git status'
+    alias gp='git push'
+    alias gb='git branch'
+    alias gst='git status'
+    alias gco='git checkout'
+    alias gcp="git cherry-pick"
+    alias gf='git fetch'
+    alias gc='git commit'
+    alias gl="git log"
+    alias gm="git merge"
+fi
+
+if [[ $(command -v composer) ]]; then
+  alias cda='composer dump-autoload'
+  alias pmigrate='php artisan migrate'
+  alias prollback='php artisan migrate:rollback'
+  alias prefresh='php artisan migrate:refresh'
+  alias pseed='php artisan db:seed'
+fi
+
+if [[ $(command -v bundle) ]]; then
+    alias b='bundle'
+    alias be='bundle exec'
+    alias bx='bundle exec'
+    alias bi='bundle install'
+    alias bo='bundle outdated'
+    alias bu='bundle update'
+    alias rc='bundle exec rails c'
+fi
+
+if [[ $(command -v python) ]]; then
+    alias python='python3'
+    alias py='python'
+    if [[ $(command -v pip) ]]; then
+        alias pip='pip3'
+        alias pi='pip install'
+        alias pu='pip uninstall'
+        alias pl='pip list'
+        alias ps='pip show'
+        alias pc='pip check'
+  fi
+fi
+
+if [[ $(command -v docker) ]]; then
+    alias d='docker'
+    alias dp='docker ps'
+    alias dk='docker kill'
+    alias di='docker image'
+    alias dil='docker image ls'
+    alias dn='docker network'
+    alias dnl='docker network ls'
+    alias dv='docker volume'
+    alias dvl='docker volume ls'
+    alias dcnt='docker container'
+    alias dcur='docker container ls -f status=running -l -q'
+    alias dexec='docker container exec -it $(dcur)'
+    alias drun='docker container run —rm -d'
+    alias drunit='docker container run —rm -it'
+    alias dport='docker container port $(dcur)'
+    alias dstart='docker container start $(dcur)'
+    alias drestart='docker container restart $(dcur)'
+    alias dstop='docker container stop $(dcur)'
+    if [[ $(command -v docker-compose) ]]; then
+      alias dc='docker compose'
+      alias dcp='docker compose ps'
+      alias dcd='docker compose down'
+      alias dck='docker compose kill'
+      alias dcl='docker compose ls'
+      alias dcl='docker compose logs -f'
+      alias dcs='docker compose start'
+      alias dcr='docker compose restart'
+      alias dct='docker compose stop'
+
+    fi
+fi
+
+alias .2='cd ../../'
+alias .3='cd ../../../'
+alias ls="ls -atG"
+alias lls="ls -alF"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='clear && ls -CF'
+alias plack="plackup script/app.psgi -I../wanon2/lib"
+alias ve='emacs -nw'
+alias vv="vim"
+alias v="vim"
+alias :wq="exit"
+alias :q="exit"
+alias re="sudo supervisorctl restart plack; tail -f /var/log/supervisor/plack/error.txt"
+alias ide="~/.scripts/ide.sh"
+alias lab='jupyter lab'
+
+#----------------------------------------------------------
+# bindkey
+#----------------------------------------------------------
+# Tabはメニュー補完、option-iはbashっぽい補完（連番ファイル選択時に便利）
+bindkey '^i' menu-complete-and-select # Tab
+bindkey 'ˆ' expand-or-complete # option-i
+
+# 履歴操作
+bindkey '^p' history-beginning-search-backward
+bindkey '^n' history-beginning-search-forward
+bindkey '^r' accept-history
+bindkey '®' select-history # TODO: menuselectの"^j"と"^m"みたいに確定キーで切り替えたい
+
+# 単語単位
+bindkey '∫' backward-word  # option-b
+bindkey 'ƒ' forward-word # option-f
+bindkey '∂' kill-word # option-d
+bindkey '˙' backward-kill-word # option-h
+
+# 最後の引数を再利用
+bindkey '≥' insert-last-word # option-.
+
+# 大文字、小文字
+bindkey 'ç' capitalize-word # option-c
+bindkey 'ü' up-case-word # option-u
+bindkey '¬' down-case-word # option-d
+
+# ヘルプ表示
+bindkey '¿' run-cheat # option-? (option-shift-/)
+
+# タブを入力したい時などに使う
+bindkey 'œ' quoted-insert # option-q # Why does not control-q work?
+bindkey -r "^v" # quoted-insert # Clipy shortcut
+
+#----------------------------------------------------------
+# tmux
+#----------------------------------------------------------
+function _left-pane() {
+  tmux select-pane -L
+}
+zle -N left-pane _left-pane
+
+function _down-pane() {
+  tmux select-pane -D
+}
+zle -N down-pane _down-pane
+
+function _up-pane() {
+  tmux select-pane -U
+}
+zle -N up-pane _up-pane
+
+function _right-pane() {
+  tmux select-pane -R
+}
+zle -N right-pane _right-pane
+
+function _backspace-or-left-pane() {
+  if [[ $#BUFFER -gt 0 ]]; then
+    zle backward-delete-char
+  elif [[ ! -z ${TMUX} ]]; then
+    zle left-pane
+  fi
+}
+zle -N backspace-or-left-pane _backspace-or-left-pane
+
+function _kill-line-or-up-pane() {
+  if [[ $#BUFFER -gt 0 ]]; then
+    zle kill-line
+  elif [[ ! -z ${TMUX} ]]; then
+    zle up-pane
+  fi
+}
+zle -N kill-line-or-up-pane _kill-line-or-up-pane
+
+function _accept-line-or-down-pane() {
+  if [[ $#BUFFER -gt 0 ]]; then
+    zle accept-line
+  elif [[ ! -z ${TMUX} ]]; then
+    zle down-pane
+  fi
+}
+zle -N accept-line-or-down-pane _accept-line-or-down-pane
+
+bindkey '^k' kill-line-or-up-pane
+bindkey '^l' right-pane
+bindkey '^h' backspace-or-left-pane
+bindkey '^j' accept-line-or-down-pane
+
+plugins=(docker docker-compose)
+
+fpath=(~/.zsh/completion $fpath)
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/ageha/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
