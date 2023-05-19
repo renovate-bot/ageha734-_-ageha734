@@ -13,7 +13,7 @@
 	symlinks = true
 	pager=delta
 [init]
-	defaultBranch = main
+	defaultBranch = master
 	templatedir = ~/.git-templates/secrets
 [http]
 	postBuffer = 524288000

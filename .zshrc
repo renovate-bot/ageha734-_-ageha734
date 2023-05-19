@@ -1,3 +1,5 @@
+# License : MIT
+
 #----------------------------------------------------------
 # setting
 #----------------------------------------------------------
@@ -9,12 +11,6 @@ export PATH="$PATH:$HOME/flutter/bin"
 export PATH="/Users/ageha/.rd/bin:$PATH"
 
 export PATH="$PATH:$HOME/.local/bin/rust-analyzer"
-#export PATH="$PATH:$HOME/.local/bin"
-#export PATH="$PATH:$HOME/.local/bin"
-#export PATH="$PATH:$HOME/.local/bin"
-#export PATH="$PATH:$HOME/.local/bin"
-#export PATH="$PATH:$HOME/.local/bin"
-#export PATH="$PATH:$HOME/.local/bin"
 
 if [ -e "$HOME/.anyenv" ]
 then
@@ -29,6 +25,10 @@ fi
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 eval "$(starship init zsh)"
+
+#----------------------------------------------------------
+# alias
+#----------------------------------------------------------
 
 # zellij session reset
 if [[ $(command -v zellij ) ]]; then

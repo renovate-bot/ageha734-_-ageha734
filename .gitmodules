@@ -1,0 +1,9 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/ageha734/server
+[submodule "app/server"]
+	path = app/server
+	url = https://github.com/ageha734/server
+[submodule "app/service"]
+	path = app/service
+	url = https://github.com/ageha734/service
